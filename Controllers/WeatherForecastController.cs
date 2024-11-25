@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using WEP_API_TEST;
 
-namespace WEP_API_TEST.Controllers
+namespace WebAPITest.Controllers
 {
     [ApiController]
     [Route("[controller]")]
