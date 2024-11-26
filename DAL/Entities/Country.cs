@@ -8,5 +8,6 @@ namespace WebAPITest.DAL.Entities
         [MaxLength(50, ErrorMessage = "El campo {0} dbe tener maximo {1} caracteres")] //Longitud MAxima
         [Required(ErrorMessage = "El campo {0} es olbigatorio")] // Obligatorio
         public String Name { get; set; }
+        // Hola Mundo
     }
 }
