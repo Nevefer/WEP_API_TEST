@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using WebAPITest.DAL.Entities;
-using WEP_API_TEST.DAL.Entities;
 
 namespace WebAPITest.DAL
 {
@@ -18,14 +17,13 @@ namespace WebAPITest.DAL
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Country>().HasIndex(c => c.Name).IsUnique(); // Aqui creo un indice del campo Name para la tabla Countries
-
-            modelBuilder.Entity<State>().HasIndex("Name", "CountryId").IsUnique(); // Haciendo un indice compuesto
-
+            modelBuilder.Entity<State>().HasIndex("Name","CountryId").IsUnique();
         }
 
         #region Dbsets
         public DbSet<Country> Countries { get; set; }
-        public DbSet<State> States { get; set; }
+
+        public DbSet<State> States{ get; set; }
 
         #endregion
     }

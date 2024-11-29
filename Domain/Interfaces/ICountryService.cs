@@ -6,7 +6,7 @@ namespace WebAPITest.Domain.Interfaces
     public interface ICountryService
     {
 
-        Task<IEnumerable<Country>> GetCountriesAsync(); //una de las tantas firmas de un metodo!
+        Task<IEnumerable<Country>> GetCountriesAsync();
 
         Task<Country> CreateCountryAsync(Country country);
 

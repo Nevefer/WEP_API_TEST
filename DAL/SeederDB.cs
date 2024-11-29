@@ -1,6 +1,6 @@
-﻿using WebAPITest.DAL;
+﻿using WebAPITest.DAL.Entities;
 
-namespace WEP_API_TEST.DAL
+namespace WebAPITest.DAL
 {
     public class SeederDB
     {
@@ -8,41 +8,66 @@ namespace WEP_API_TEST.DAL
 
         public SeederDB(DataBaseContext context)
         {
-            context = _context;
+            _context = context;
         }
 
-        //Crearemos un metodo llamado SeederAsync()
-        //Este metodo es un MAIN() 
-        //Este metodo tendra la responsabilidad de prepoblar diferentes tablas de la BD
+        //Seeder asign 
+        //Metodo MAIN()
+        //Este metodo prepobla diff tablas de la BD
 
         public async Task SeederAsync()
         {
-            // Primero; agregare un metodo propio de EF que hace las veces del comando  'update-database'
-            // En otras palabras: un metodo que me creara la BD inmediatamente ponga en ejecucion mi API
             await _context.Database.EnsureCreatedAsync();
 
-            //Apartir de aqui vamos a ir creando metodos que me sirvan para prepoblar mi BD
-            await PopulateCountriesAsync();
+            //Metodos para repoblar bd
+
+            await populateCountriesAsync();
 
             await _context.SaveChangesAsync();
-
         }
-
-
-
-        #region Private Methods 
-
-        private async Task PopulateCountriesAsync()
+        #region Private methods
+        private async Task populateCountriesAsync()
         {
-            //El metodo Any negado (!) me indica que no hay nda absolutamente en la tabla 
-            //EL metodo !Any() me indica si la tabla Countries tiene almenos un registro
-
-            if (!_context.Countries.Any()) 
+            if (!_context.Countries.Any())
             {
-
+                _context.Countries.Add(new Country
+                {
+                    CreatedDate = DateTime.Now,
+                    Name = "Colombia",
+                    States = new List<State>()
+                    {
+                        new State
+                        {
+                            CreatedDate = DateTime.Now,
+                            Name = "Antioquia"
+                        },
+                        new State
+                        {
+                            CreatedDate = DateTime.Now,
+                            Name = "Cundinamarca"
+                        }
+                    }
+                });
+                _context.Countries.Add(new Country
+                {
+                    CreatedDate = DateTime.Now,
+                    Name = "Argentina",
+                    States = new List<State>()
+                    {
+                        new State
+                        {
+                            CreatedDate = DateTime.Now,
+                            Name = "Buenos Aires"
+                        },
+                        new State
+                        {
+                            CreatedDate = DateTime.Now,
+                            Name = "La Pampa"
+                        }
+                    }
+                });
             }
         }
-
         #endregion
     }
 }

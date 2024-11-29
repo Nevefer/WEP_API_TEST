@@ -12,8 +12,8 @@ using WebAPITest.DAL;
 namespace WEP_API_TEST.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20241125220842_initialDB")]
-    partial class initialDB
+    [Migration("20241129054539_InitialDB")]
+    partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,52 @@ namespace WEP_API_TEST.Migrations
                         .IsUnique();
 
                     b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("WebAPITest.DAL.Entities.State", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CountryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("Name", "CountryId")
+                        .IsUnique();
+
+                    b.ToTable("States");
+                });
+
+            modelBuilder.Entity("WebAPITest.DAL.Entities.State", b =>
+                {
+                    b.HasOne("WebAPITest.DAL.Entities.Country", "Country")
+                        .WithMany("States")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("WebAPITest.DAL.Entities.Country", b =>
+                {
+                    b.Navigation("States");
                 });
 #pragma warning restore 612, 618
         }

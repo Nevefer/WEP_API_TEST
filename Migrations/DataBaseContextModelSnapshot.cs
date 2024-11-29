@@ -47,7 +47,7 @@ namespace WEP_API_TEST.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("WEP_API_TEST.DAL.Entities.State", b =>
+            modelBuilder.Entity("WebAPITest.DAL.Entities.State", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +77,7 @@ namespace WEP_API_TEST.Migrations
                     b.ToTable("States");
                 });
 
-            modelBuilder.Entity("WEP_API_TEST.DAL.Entities.State", b =>
+            modelBuilder.Entity("WebAPITest.DAL.Entities.State", b =>
                 {
                     b.HasOne("WebAPITest.DAL.Entities.Country", "Country")
                         .WithMany("States")

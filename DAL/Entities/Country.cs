@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WEP_API_TEST.DAL.Entities;
 
 namespace WebAPITest.DAL.Entities
 {
@@ -10,9 +9,7 @@ namespace WebAPITest.DAL.Entities
         [Required(ErrorMessage = "El campo {0} es olbigatorio")] // Obligatorio
         public String Name { get; set; }
 
-        [Display(Name = "Estados / Departamentos")]
+        [Display(Name = "Estados/Departamentos")]
         public ICollection<State>? States { get; set; }
-
-
     }
 }
